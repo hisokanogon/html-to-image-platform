@@ -1,5 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const cors = require('cors');
 const genericPool = require('generic-pool');
 const crypto = require('crypto');
@@ -21,7 +21,10 @@ app.use(limiter);
 const cache = new Map();
 
 const puppeteerFactory = {
-  create: () => puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] }),
+  create: () => puppeteer.launch({ 
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    executablePath: process.env.CHROME_PATH || undefined
+  }),
   destroy: (browser) => browser.close(),
 };
 
