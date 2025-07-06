@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const templateSelector = document.getElementById('template-selector');
     const separateModeRadio = document.getElementById('mode-separate');
     const livePreviewOutput = document.getElementById('live-preview-output');
-    const outputWidthInput = document.getElementById('output-width');
     
     let lastGeneratedBlob = null;
 
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
             format: 'png',
             transparent: true,
-            width: parseInt(outputWidthInput.value, 10) || 1200,
         };
 
         if (inputMode === 'separate') {
@@ -92,7 +90,7 @@ code { font-family: inherit; }`
             html: `<div class="post-card">
   <img src="https://picsum.photos/seed/picsum/600/600" alt="Sample photo">
   <div class="post-overlay">
-    <div class="username">@Yorubox</div>
+    <div class="username">@codelove</div>
     <div class="caption">Creating beautiful things with code.</div>
   </div>
 </div>`,
@@ -108,13 +106,13 @@ body { display: flex; justify-content: center; align-items: center; padding: 20p
             name: 'Professional Business Card',
             html: `<div class="business-card">
   <div class="logo-side">
-    <span>HI</span>
+    <span>JD</span>
   </div>
   <div class="info-side">
-    <h3>Firstname Lastname</h3>
-    <p>Web Developer</p>
+    <h3>Jane Doe</h3>
+    <p>Lead Web Developer</p>
     <ul>
-      <li>name123@example.com</li>
+      <li>jane.doe@example.com</li>
       <li>(555) 123-4567</li>
       <li>example.com</li>
     </ul>
@@ -195,16 +193,19 @@ body { display: flex; flex-direction: column; gap: 15px; padding: 20px; min-widt
     htmlEditor.on('change', debouncedUpdatePreview);
     cssEditor.on('change', debouncedUpdatePreview);
     combinedEditor.on('change', debouncedUpdatePreview);
-    outputWidthInput.addEventListener('input', debouncedUpdatePreview);
 
     templateSelector.addEventListener('change', (e) => {
         resultContainer.classList.add('hidden');
         const selectedTemplate = templates.find(t => t.name === e.target.value);
         if (selectedTemplate) {
-            separateModeRadio.checked = true;
-            separateModeRadio.dispatchEvent(new Event('change'));
             htmlEditor.setValue(selectedTemplate.html);
             cssEditor.setValue(selectedTemplate.css);
+            
+            const combinedValue = `<style>\n${selectedTemplate.css}\n</style>\n\n${selectedTemplate.html}`;
+            combinedEditor.setValue(combinedValue);
+
+            separateModeRadio.checked = true;
+            separateModeRadio.dispatchEvent(new Event('change'));
             updatePreview();
         }
     });
@@ -217,7 +218,7 @@ body { display: flex; flex-direction: column; gap: 15px; padding: 20px; min-widt
             combinedEditorContainer.classList.toggle('hidden', isSeparate);
             if (isSeparate) { htmlEditor.refresh(); cssEditor.refresh(); } else { combinedEditor.refresh(); }
             if (e.isTrusted) templateSelector.value = "";
-            debouncedUpdatePreview();
+            updatePreview();
         });
     });
 
@@ -225,7 +226,7 @@ body { display: flex; flex-direction: column; gap: 15px; padding: 20px; min-widt
         radio.addEventListener('change', () => {
             const format = document.querySelector('input[name="format"]:checked').value;
             pngOptions.classList.toggle('hidden', format !== 'png');
-            jpegOptions.classList.toggle('hidden', format !== 'jpeg');
+jpegOptions.classList.toggle('hidden', format !== 'jpeg');
         });
     });
     
@@ -242,7 +243,6 @@ body { display: flex; flex-direction: column; gap: 15px; padding: 20px; min-widt
         const payload = {
             format: format,
             transparent: document.getElementById('transparent-bg').checked,
-            width: parseInt(outputWidthInput.value, 10) || 1200,
             jpegQuality: parseInt(jpegQualitySlider.value, 10) || 90
         };
 
