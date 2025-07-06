@@ -23,7 +23,7 @@ const cache = new Map();
 const puppeteerFactory = {
   create: () => puppeteer.launch({ 
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    executablePath: process.env.CHROME_PATH || undefined
+    executablePath: '/usr/bin/google-chrome'
   }),
   destroy: (browser) => browser.close(),
 };
