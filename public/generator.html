@@ -20,6 +20,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="main-header">
+        <nav class="main-nav">
+            <a href="/" class="nav-brand">HTML to Image Converter</a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/how-to">How to Use</a></li>
+                <li><a href="/changelog">Changelog</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="container">
         <h1>HTML to Image Converter</h1>
         <p>Paste your code below or select a template to see a live preview.</p>
@@ -71,10 +82,6 @@
         <div class="options-bar">
             <div class="options">
                 <div class="option-item">
-                    <label for="output-width">Render Width (px):</label>
-                    <input type="number" id="output-width" value="1200">
-                </div>
-                <div class="option-item">
                     <label>Final Format:</label>
                     <input type="radio" id="format-png" name="format" value="png" checked>
                     <label for="format-png">PNG</label>
@@ -103,25 +110,47 @@
         </div>
     </div>
     
+    <div class="faq-container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <details>
+                <summary>What formats can I export to?</summary>
+                <p>You can export your final image as a PNG, JPEG, or PDF. PNGs support transparent backgrounds, while JPEGs allow you to control the quality to get a smaller file size.</p>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>How do I use this tool?</summary>
+                <p>We have a detailed guide! Please check out the <a href="/how-to">How to Use</a> page for a full walkthrough of all the features.</p>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Why doesn't the final image update when I check "Transparent Background"?</summary>
+                <p>The live preview is for quick HTML/CSS feedback only. Settings like transparency, format, and quality are only applied during the final rendering. After changing a setting, you must click the "Generate Downloadable File" button again to see the result.</p>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>I have an idea for a feature or found a bug.</summary>
+                <p>That's great! We'd love to hear from you. Please send us your thoughts by clicking the "Report Bug / Suggest Idea" button in the footer.</p>
+            </details>
+        </div>
+    </div>
+
     <footer class="site-footer">
         <div class="footer-content">
-            <a href="mailto:yorubox.team@gmail.com?subject=Bug Report / Idea" class="footer-button report-button">Report Bug / Suggest Idea</a>
-
+            <a href="mailto:youremail@example.com?subject=Bug Report / Idea" class="footer-button report-button">Report Bug / Suggest Idea</a>
             <div class="footer-text">
                 <p>Copyright © 2025 YoruBox. All Rights Reserved.</p>
-                <p>
-                    Released under the MIT License.
-                </p>
+                <p>Released under the MIT License.</p>
             </div>
-            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#000000', 'F1F01GPLQQ');kofiwidget2.draw();</script> 
             
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#000000', 'F1F01GPLQQ');kofiwidget2.draw();</script> 
         </div>
+
     </footer>
 
-
-    <script src="script.js"></script>
-    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
 <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
 <script>
   kofiWidgetOverlay.draw('yorubox', {
@@ -131,5 +160,6 @@
     'floating-chat.donateButton.text-color': '#fff'
   });
 </script>
+    <script src="script.js"></script>
 </body>
 </html>
