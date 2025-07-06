@@ -4,6 +4,7 @@ const cors = require('cors');
 const genericPool = require('generic-pool');
 const crypto = require('crypto');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,11 +21,16 @@ app.use(limiter);
 
 const cache = new Map();
 
+const launchOptions = { 
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+};
+
+if (process.env.RENDER) {
+    launchOptions.executablePath = '/usr/bin/google-chrome';
+}
+
 const puppeteerFactory = {
-  create: () => puppeteer.launch({ 
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    executablePath: '/usr/bin/google-chrome'
-  }),
+  create: () => puppeteer.launch(launchOptions),
   destroy: (browser) => browser.close(),
 };
 
@@ -37,18 +43,29 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'generator.html'));
+});
+
+app.get('/how-to', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'how-to.html'));
+});
+
+app.get('/changelog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'changelog.html'));
+});
+
 app.post('/api/convert', async (req, res) => {
     const { 
         html: separateHtml, 
         css: separateCss, 
         combinedCode, 
         format, 
-        transparent, 
-        width,
+        transparent,
         jpegQuality
     } = req.body;
     
-    const requestKeyObject = { separateHtml, css: separateCss, combinedCode, format, transparent, width, jpegQuality };
+    const requestKeyObject = { separateHtml, css: separateCss, combinedCode, format, transparent, jpegQuality };
     const keyString = JSON.stringify(requestKeyObject);
     const cacheKey = crypto.createHash('sha256').update(keyString).digest('hex');
 
@@ -78,7 +95,7 @@ app.post('/api/convert', async (req, res) => {
         const page = await browser.newPage();
         
         await page.setViewport({
-            width: width || 1200,
+            width: 1920,
             height: 3000
         });
 
