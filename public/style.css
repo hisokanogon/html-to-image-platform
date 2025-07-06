@@ -3,9 +3,52 @@ body {
     background-color: #f4f7f9;
     color: #333;
     margin: 0;
-    padding: 0 20px 20px 20px;
+    padding: 0;
 }
-.container {
+
+.main-header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.main-nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.nav-brand {
+    font-weight: bold;
+    font-size: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover {
+    color: #007bff;
+}
+
+.container, .static-page-container {
     max-width: 1400px;
     margin: 20px auto;
     background-color: #fff;
@@ -13,6 +56,30 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+.static-page-container {
+    max-width: 900px;
+    line-height: 1.7;
+}
+
+.static-page-container h2, .static-page-container h3 {
+    color: #007bff;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+.static-page-container ul {
+    padding-left: 20px;
+}
+
+.static-page-container .important-note {
+    background-color: #fff3cd;
+    border-left: 5px solid #ffeeba;
+    padding: 15px;
+    border-radius: 4px;
+}
+
 h1 { color: #007bff; }
 
 .main-content-wrapper {
@@ -103,12 +170,6 @@ h1 { color: #007bff; }
     gap: 25px;
     flex-wrap: wrap;
 }
-.option-item input[type="number"] {
-    width: 80px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
 #jpeg-options span {
     font-weight: bold;
     min-width: 25px;
@@ -172,6 +233,53 @@ button:disabled { background-color: #aaa; cursor: not-allowed; }
     background-color: #5a6268;
 }
 
+.faq-container {
+    max-width: 1400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.faq-container h2 {
+    text-align: center;
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+.faq-item {
+    border-bottom: 1px solid #e9ecef;
+}
+.faq-item:last-child {
+    border-bottom: none;
+}
+.faq-item summary {
+    padding: 15px 0;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none; /* Hide default triangle */
+    position: relative;
+    padding-right: 25px;
+}
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+.faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 5px;
+    font-size: 20px;
+    color: #007bff;
+}
+.faq-item details[open] summary::after {
+    content: '−';
+}
+.faq-item p {
+    padding: 0 10px 15px;
+    margin: 0;
+    line-height: 1.7;
+}
+
 .site-footer {
     background-color: #fff;
     padding: 20px 30px;
@@ -211,15 +319,14 @@ button:disabled { background-color: #aaa; cursor: not-allowed; }
     font-size: 14px;
     transition: all 0.2s ease;
 }
-.kofi-button {
-    background-color: #FF5E5B;
-}
-.kofi-button:hover {
-    background-color: #e65552;
-}
 .report-button {
     background-color: #6c757d;
 }
 .report-button:hover {
     background-color: #5a6268;
+}
+
+#kofi-widget-container {
+    width: 215px; 
+    text-align: right;
 }
